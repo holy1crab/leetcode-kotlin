@@ -29,6 +29,20 @@
 // can't deal with it, looking for Discussion, found this
 // > Hint: if you start from station a and stuck at b, then you can't get to b from any station between a and b.
 // and I didn't get how it works :)
+
+/*
+edited:
+a few moments later...
+figured it out, so why this hint useful, and it works
+let's imagine that we are driving from a -> b -> c -> d -> e (on `d` we got minus, so it means we didn't get the "d" station)
+but this also means that on previous stations we got positive (or zero) difference in sum,
+so `a` (positive) + `b` (positive) + `c` (positive) > 0 and finally on `d` we got `negative` ->
+`a` + `b` + `c` < `d`
+-> `b` + `c` < `d`
+-> `c` < `d`
+it means that there is no point to check `b` starting index or `c` starting index,
+they all will be less than `d` at this point
+ */
 fun canCompleteCircuit(gas: IntArray, cost: IntArray): Int {
     val size = gas.size
     var startIndex = 0
