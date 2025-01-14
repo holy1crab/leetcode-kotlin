@@ -1,6 +1,4 @@
-class ListNode(var `val`: Int) {
-    var next: ListNode? = null
-}
+import common.ListNode
 
 fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
     val res = ListNode(3)
