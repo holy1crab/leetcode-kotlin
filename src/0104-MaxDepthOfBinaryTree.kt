@@ -1,9 +1,5 @@
 import kotlin.math.max
-
-class TreeNode(val `val`: Int) {
-    var left: TreeNode? = null
-    var right: TreeNode? = null
-}
+import common.TreeNode
 
 /*
     my own attempt without recursion (I just didn't know recursion solution)
@@ -11,7 +7,7 @@ class TreeNode(val `val`: Int) {
     on every depth level we save the array of current level nodes
     if there are no nodes then it's the max depth
  */
-fun maxDepth(root: TreeNode?): Int {
+fun <T> maxDepth(root: TreeNode<T>?): Int {
     if (root == null) {
         return 0
     }
@@ -41,7 +37,7 @@ fun maxDepth(root: TreeNode?): Int {
 /*
     what I found later
 */
-fun maxDepthRec(root: TreeNode?): Int {
+fun <T> maxDepthRec(root: TreeNode<T>?): Int {
     if (root == null) {
         return 0 // start count from this (deepest from current node)
     }
@@ -64,7 +60,7 @@ fun main() {
     root.right?.right?.right = TreeNode(8)
 
     println(maxDepth(root) == 4)
-    println(maxDepth(null) == 0)
+    println(maxDepth<Int>(null) == 0)
 
     println(maxDepthRec(root) == 4)
 }
