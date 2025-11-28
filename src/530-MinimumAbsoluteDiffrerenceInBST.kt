@@ -42,19 +42,27 @@ private fun recursive(node: TreeNode<Int>?, elements: MutableList<Int>) {
         return
     }
     recursive(node.left, elements)
-    println(node.`val`)
     elements.add(node.`val`)
     recursive(node.right, elements)
 }
 
 private fun getMinimumDifference(root: TreeNode<Int>?): Int {
+    if (root == null) {
+        return 0
+    }
     val sortedElements = mutableListOf<Int>()
     recursive(root, sortedElements)
-    return 0
+    var min = Int.MAX_VALUE
+    for (index in 0..sortedElements.size - 2) {
+        val el = sortedElements[index]
+        val next = sortedElements[index + 1]
+        min = minOf(min, next - el)
+    }
+    return min
 }
 
 fun main() {
 
     println(getMinimumDifference(treeNodesFromIterable(listOf(4, 2, 6, 1, 3))))
-//    println(getMinimumDifference(treeNodesFromIterable(listOf(1, null, 3, 2))))
+    println(getMinimumDifference(treeNodesFromIterable(listOf(1, null, 3, 2))))
 }
