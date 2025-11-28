@@ -5,23 +5,26 @@ class TreeNode<T>(val `val`: T) {
     var right: TreeNode<T>? = null
 }
 
-fun <T> treeNodesFromIterable(list: Iterable<T>): TreeNode<T>? {
+fun <T> treeNodesFromIterable(list: Iterable<T?>): TreeNode<T>? {
 
     val iter = list.iterator()
-    if (!iter.hasNext()) {
+    val rootData = if (iter.hasNext()) iter.next() else null
+    if (rootData == null) {
         return null
     }
 
-    val root = TreeNode(iter.next())
+    val root = TreeNode<T>(rootData)
     val queue = mutableListOf(root)
     var leftOrRight = true
     while (iter.hasNext()) {
         val el = iter.next()
-        val nextNode = TreeNode(el)
-        val node = if (leftOrRight) queue[0] else queue.removeFirst()
-        if (leftOrRight) node.left = nextNode else node.right = nextNode
+        if (el != null) {
+            val nextNode = TreeNode<T>(el)
+            val node = if (leftOrRight) queue[0] else queue.removeFirst()
+            if (leftOrRight) node.left = nextNode else node.right = nextNode
+            queue.add(nextNode)
+        }
         leftOrRight = !leftOrRight
-        queue.add(nextNode)
     }
     return root
 }
